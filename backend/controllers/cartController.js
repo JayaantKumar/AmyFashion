@@ -8,7 +8,7 @@ const addToCart = async (req, res) => {
         const {userId, itemId, size} = req.body
 
         const userData = await userModel.findById(userId)
-        let cartData = await userData.cartData;
+        let cartData = userData.cartData;
 
         if(cartData[itemId]){
             if(cartData[itemId][size]){
@@ -23,7 +23,7 @@ const addToCart = async (req, res) => {
             cartData[itemId][size] = 1
         }
 
-        await userModel.findByIdAndUpdate(userId, {cartData})
+        await userModel.findByIdAndUpdate(userId,  { cartData } );
 
         res.json({success: true, message: "Added to Cart"})
 
@@ -45,7 +45,7 @@ const updateCart = async (req, res) => {
 
         cartData[itemId][size] = quantity
 
-        await userModel.findByIdAndUpdate(userId, {cartData})
+        await userModel.findByIdAndUpdate(userId,  { cartData } );
         res.json({success: true, message: "Cart Updated"})
 
     } catch (error) {
@@ -59,7 +59,7 @@ const getUserCart = async (req, res) => {
 
     try {
 
-        const {userId} = req.body
+        const { userId } = req.params; // Assuming the route is set up as GET /cart/:userId
 
         const userData = await userModel.findById(userId)
         let cartData = await userData.cartData;  

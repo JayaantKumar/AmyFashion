@@ -11,10 +11,10 @@ const Navbar = () => {
 
     const logout = () => {
         /* Removing token from localstorage */
+        navigate('/login')
         localStorage.removeItem('token')
         setToken('')
         setCartItems({})
-        navigate('/login')
     }
 
   return (
