@@ -59,7 +59,7 @@ const getUserCart = async (req, res) => {
 
     try {
 
-        const { userId } = req.params; // Assuming the route is set up as GET /cart/:userId
+        const { userId } = req.body; 
 
         const userData = await userModel.findById(userId)
         let cartData = await userData.cartData;  
